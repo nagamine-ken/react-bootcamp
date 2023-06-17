@@ -1,9 +1,15 @@
-import "./App.css";
+
+import "./App.css"
+import Header from "./header.jsx"
+import Footer from "./Footer.jsx"
+import Note from "./Note.jsx"
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World!</h1>
+    <div>
+    <Header />
+    <Note />
+    <Footer />
     </div>
   );
 }
