@@ -1,5 +1,6 @@
 import "./App.css";
 import Avatar from "./Avatar";
+import Detail from "./Detail";
 
 function Note(props) {
   return (
@@ -13,12 +14,11 @@ function Note(props) {
           {/* Here we get the data from the parent App.js as a "props" property, and pass it to the Avatar.jsx child as follows: */}
           <Avatar imgURL={props.imgURL} />
         </div>
-
         <div className="bottom">
-          <p className="info">Phone: {props.tel}</p>
-          <p className="info">Email: {props.email}</p>
+        <Detail detailInfo={props.phone}/>
+        <Detail detailInfo={props.email}/>
+        
         </div>
-
       </div>
     </div>
   );
