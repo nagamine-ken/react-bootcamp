@@ -1,30 +1,37 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import "./App.css";
 import Header from "./header.jsx";
 import Footer from "./Footer.jsx";
 import Note from "./Note.jsx";
 import notes from "./notes";
+import Login from "./Login";
+import Form from "./Form";
+import { createRoot } from "react-dom/client";
 
+const domNode = document.getElementById("root");
+const root = createRoot(domNode);
 
 // Keeoer's App:
-function App() {
-  return (
-    <div>
-      <Header />
-      {notes.map((noteItem)=>{
-        return (
-          <Note
-            // All of these data is passed to the Note.jsx child as an object called "props":
-            key={noteItem.id}
-            title={noteItem.title}
-            content={noteItem.content}
-          />
-        );
-      })}
+// function App() {
+//   return (
+//     <div>
+//       <Header />
+//       {notes.map((noteItem)=>{
+//         return (
+//           <Note
+//             // All of these data is passed to the Note.jsx child as an object called "props":
+//             key={noteItem.id}
+//             title={noteItem.title}
+//             content={noteItem.content}
+//           />
+//         );
+//       })}
 
-      <Footer />
-    </div>
-  );
-}
+//       <Footer />
+//     </div>
+//   );
+// }
 
 // function App() {
 //   return (
@@ -50,5 +57,38 @@ function App() {
 //     </div>
 //   );
 // }
+
+// const userIsRegistered = true;
+
+// function App() {
+//   return (
+//     <div className="container">
+//       <Form isRegistered={userIsRegistered} />
+//     </div>
+
+//   );
+// }
+
+function App() {
+  var count = 0;
+
+  function increase() {
+    count++;
+    console.log(count);
+    root.render(
+      <div className="container">
+        <h1>{count}</h1>
+        <button onClick={increase}>+</button>
+      </div>
+    );
+  }
+
+  root.render(
+    <div className="container">
+      <h1>{count}</h1>
+      <button onClick={increase}>+</button>
+    </div>
+  );
+}
 
 export default App;
