@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./App.css";
 import Header from "./header.jsx";
@@ -7,10 +7,6 @@ import Note from "./Note.jsx";
 import notes from "./notes";
 import Login from "./Login";
 import Form from "./Form";
-import { createRoot } from "react-dom/client";
-
-const domNode = document.getElementById("root");
-const root = createRoot(domNode);
 
 // Keeoer's App:
 // function App() {
@@ -70,23 +66,22 @@ const root = createRoot(domNode);
 // }
 
 function App() {
-  var count = 0;
+  
+  let now = new Date().toLocaleTimeString();
+  console.log(now);
 
-  function increase() {
-    count++;
-    console.log(count);
-    root.render(
-      <div className="container">
-        <h1>{count}</h1>
-        <button onClick={increase}>+</button>
-      </div>
-    );
+  const [time, setTime] = useState(now)
+
+  function updateTime(){
+    let newTime = new Date().toLocaleTimeString();
+    setTime(newTime)
   }
 
-  root.render(
+
+  return (
     <div className="container">
-      <h1>{count}</h1>
-      <button onClick={increase}>+</button>
+      <h1>{time}</h1>
+      <button onClick={updateTime}>Get Time</button>
     </div>
   );
 }
