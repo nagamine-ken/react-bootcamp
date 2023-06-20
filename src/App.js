@@ -2,21 +2,21 @@ import "./App.css";
 import Header from "./header.jsx";
 import Footer from "./Footer.jsx";
 import Note from "./Note.jsx";
-// import contacts from "./contacts";
 import notes from "./notes";
-// import emojipedia from "./emojipedia";
 
+
+// Keeoer's App:
 function App() {
   return (
     <div>
       <Header />
-      {notes.map((notes)=>{
+      {notes.map((noteItem)=>{
         return (
           <Note
             // All of these data is passed to the Note.jsx child as an object called "props":
-            key={notes.id}
-            title={notes.title}
-            content={notes.content}
+            key={noteItem.id}
+            title={noteItem.title}
+            content={noteItem.content}
           />
         );
       })}

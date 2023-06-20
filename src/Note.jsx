@@ -1,5 +1,4 @@
 import "./App.css";
-// import Avatar from "./Avatar";
 import Detail from "./Detail";
 
 function Note(props) {
