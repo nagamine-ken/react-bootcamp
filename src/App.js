@@ -65,25 +65,66 @@ import Form from "./Form";
 //   );
 // }
 
-function App() {
+// Clock:
+
+// function App() {
+
+//   setInterval(updateTime, 1000)
   
-  let now = new Date().toLocaleTimeString();
-  console.log(now);
+//   let now = new Date().toLocaleTimeString();
+//   // console.log(now);
 
-  const [time, setTime] = useState(now)
+//   const [time, setTime] = useState(now)
 
-  function updateTime(){
-    let newTime = new Date().toLocaleTimeString();
-    setTime(newTime)
+//   function updateTime(){
+//     let newTime = new Date().toLocaleTimeString();
+//     setTime(newTime)
+//   }
+
+
+//   return (
+//     <div className="container">
+//       <h1>{time}</h1>
+//       <button onClick={updateTime}>Get Time</button>
+//     </div>
+//   );
+// }
+
+// Event Handler:
+
+function App() {
+
+  const [headingText, setHeadingText] = useState("Hey!")
+  const [isMouseOver, setMouseOver] = useState(false)
+  const [currentInput, setNewInput] = useState("")
+
+  function handleClick(){
+    setHeadingText(currentInput)
+    console.log("Clicked!")
   }
 
+  function mouseOver(){
+    setMouseOver(true)
+  } 
+
+  function mouseOut(){
+    setMouseOver(false)
+  } 
+
+  function handleChange(event){
+    console.log(event.target.value)
+    setNewInput(event.target.value)
+  }
 
   return (
     <div className="container">
-      <h1>{time}</h1>
-      <button onClick={updateTime}>Get Time</button>
+      <h1>{headingText}</h1>
+      <input onChange={handleChange} value={currentInput} type="text" placeholder="Type anything" />
+      <button style={{backgroundColor: isMouseOver ? "black" : "white" }} onClick={handleClick} onMouseOver={mouseOver} onMouseOut={mouseOut}>Submit</button>
     </div>
   );
 }
+
+
 
 export default App;
