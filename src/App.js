@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import "./App.css";
-import Header from "./header.jsx";
-import Footer from "./Footer.jsx";
-import Note from "./Note.jsx";
-import notes from "./notes";
-import Login from "./Login";
-import Form from "./Form";
+// import Header from "./header.jsx";
+// import Footer from "./Footer.jsx";
+// import Note from "./Note.jsx";
+// import notes from "./notes";
+// import Login from "./Login";
+// import Form from "./Form";
+import ToDoItem from "./ToDoItem";
+import { v4 as uuidv4 } from 'uuid'
+
+
 
 // Keeoer's App:
 // function App() {
@@ -96,7 +100,7 @@ import Form from "./Form";
 //   const [isMouseOver, setMouseOver] = useState(false);
 //   const [currentInput, setNewInput] = useState("");
 
-//   function handleClick(event) {
+//   function addItem(event) {
 //     setHeadingText(currentInput);
 //     console.log("Clicked!");
 
@@ -119,7 +123,7 @@ import Form from "./Form";
 //   return (
 //     <div className="container">
 //       <h1>{headingText}</h1>
-//       <form onSubmit={handleClick}>
+//       <form onSubmit={addItem}>
 //         <input
 //           onChange={handleChange}
 //           value={currentInput}
@@ -223,9 +227,7 @@ import Form from "./Form";
 //         }
 //       }
 //     })
-
 //   }
-
 
 //   return (
 //     <div className="container">
@@ -243,6 +245,10 @@ import Form from "./Form";
 //     </div>
 //   );
 // }
+
+
+
+
 
 // function App() {
 //   const [contact, setContact] = useState({
@@ -289,9 +295,21 @@ import Form from "./Form";
 
 function App() {
 
-  
+  const [inputText, setInputText] = useState("")
+  const [items, setItems] = useState([])
 
+  function handleChange(event){
+    console.log(event.target.value)
+    const newValue = event.target.value
+    setInputText(newValue)
+  }
 
+  function addItem(){
+    setItems( prevItems =>{
+      return [...prevItems, inputText]
+    })
+    setInputText("")
+  }
 
   return (
     <div className="container">
@@ -299,14 +317,18 @@ function App() {
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-        <input type="text" />
-        <button>
+        <input onChange={handleChange} type="text" value={inputText}/>
+        <button onClick={addItem}>
           <span>Add</span>
         </button>
       </div>
       <div>
         <ul>
-          <li>A Item</li>
+          {items.map((item)=>{
+            // console.log(items)
+            // return <li>{item}</li>
+            return <ToDoItem key={uuidv4()} text={item} />
+          })}
         </ul>
       </div>
     </div>
