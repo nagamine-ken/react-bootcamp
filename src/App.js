@@ -188,60 +188,130 @@ import Form from "./Form";
 // }
 
 
+// function App() {
+//   const [contact, setContact] = useState({
+//     fName: "",
+//     lName: "",
+//     email: ""
+//   });
+
+//   function handleChange(event){
+//     //name and value of the <input> elements:
+//     let {name, value} = event.target
+
+//     console.log(name)
+//     console.log(value)
+
+//     setContact(prevState => {
+//       if (name === "fName"){
+//         return {
+//           fName: value,
+//           lName: prevState.lName,
+//           email: prevState.email
+//         }
+//       } else if (name === "lName"){
+//         return {
+//           fName: prevState.fName,
+//           lName: value,
+//           email: prevState.email
+//         }
+//       } else if (name === "email"){
+//         return {
+//           fName: prevState.fName,
+//           lName: prevState.lName,
+//           email: value
+//         }
+//       }
+//     })
+
+//   }
+
+
+//   return (
+//     <div className="container">
+//       <h1>
+//         Hello {contact.fName} {contact.lName}
+//       </h1>
+//       <p>{contact.email}</p>
+      
+//       <form>
+//         <input name="fName" onChange={handleChange} placeholder="First Name" value={contact.fName}/>
+//         <input name="lName" onChange={handleChange} placeholder="Last Name" value={contact.lName}/>
+//         <input name="email" onChange={handleChange} placeholder="Email" value={contact.email}/>
+//         <button>Submit</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// function App() {
+//   const [contact, setContact] = useState({
+//     fName: "",
+//     lName: "",
+//     email: ""
+//   });
+
+//   function handleChange(event){
+//     //name and value of the <input> elements:
+//     let {name, value} = event.target
+
+//     console.log(name)
+//     console.log(value)
+
+//     setContact(prevState => {
+//       return {
+//         ...prevState,
+//         [name]: value
+//       }
+//     })
+
+//   }
+
+
+//   return (
+//     <div className="container">
+//       <h1>
+//         Hello {contact.fName} {contact.lName}
+//       </h1>
+//       <p>{contact.email}</p>
+      
+//       <form>
+//         <input name="fName" onChange={handleChange} placeholder="First Name" value={contact.fName}/>
+//         <input name="lName" onChange={handleChange} placeholder="Last Name" value={contact.lName}/>
+//         <input name="email" onChange={handleChange} placeholder="Email" value={contact.email}/>
+//         <button>Submit</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+
+
 function App() {
-  const [contact, setContact] = useState({
-    fName: "",
-    lName: "",
-    email: ""
-  });
 
-  function handleChange(event){
-    //name and value of the <input> elements:
-    let {name, value} = event.target
+  
 
-    console.log(name)
-    console.log(value)
-
-    setContact(prevState => {
-      if (name === "fName"){
-        return {
-          fName: value,
-          lName: prevState.lName,
-          email: prevState.email
-        }
-      } else if (name === "lName"){
-        return {
-          fName: prevState.fName,
-          lName: value,
-          email: prevState.email
-        }
-      } else if (name === "email"){
-        return {
-          fName: prevState.fName,
-          lName: prevState.lName,
-          email: value
-        }
-      }
-    })
-
-  }
 
 
   return (
     <div className="container">
-      <h1>
-        Hello {contact.fName} {contact.lName}
-      </h1>
-      <p>{contact.email}</p>
-      
-      <form>
-        <input name="fName" onChange={handleChange} placeholder="First Name" value={contact.fName}/>
-        <input name="lName" onChange={handleChange} placeholder="Last Name" value={contact.lName}/>
-        <input name="email" onChange={handleChange} placeholder="Email" value={contact.email}/>
-        <button>Submit</button>
-      </form>
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input type="text" />
+        <button>
+          <span>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+          <li>A Item</li>
+        </ul>
+      </div>
     </div>
   );
 }
+
 
 export default App;
