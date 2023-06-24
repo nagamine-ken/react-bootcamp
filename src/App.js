@@ -140,45 +140,104 @@ import Form from "./Form";
 
 
 
-function App() {
+// function App() {
 
-  let [fullName, setFullName] = useState({
-    fName: "",
-    lName: ""
-  })
+//   let [fullName, setFullName] = useState({
+//     fName: "",
+//     lName: ""
+//   })
   
 
-  function handleChange(event){
-    const newValue = event.target.value
-    const inputName = event.target.name
-    let {name, value} = event.target
-    console.log(newValue)
-    console.log(inputName)
+//   function handleChange(event){
+//     // const newValue = event.target.value
+//     // const inputName = event.target.name
+//     let {name, value} = event.target
 
-    // The next snippet is crucial to MANAGE COMPLEX STATES:
-    setFullName(prevState => {
-      if(name === "fName"){
+//     console.log(name)
+//     console.log(value)
+
+//     // The next snippet is crucial to MANAGE COMPLEX STATES:
+//     // You CANNOT USE event.target inside a stateful setter!!!
+//     setFullName(prevState => {
+//       if(name === "fName"){
+//         return {
+//           fName: value,
+//           lName: prevState.lName
+//         }
+//       } else if(name === "lName"){
+//         return {
+//           fName: prevState.fName,
+//           lName: value
+//         }
+//       }
+//     })
+//   }
+
+  
+
+//   return (
+//     <div className="container">
+//       <h1>Hello {fullName.fName} {fullName.lName}</h1>
+//       <form>
+//         <input name="fName" onChange={handleChange} placeholder="First Name" value={fullName.fName}/>
+//         <input name="lName" onChange={handleChange} placeholder="Last Name" value={fullName.lName}/>
+//         <button>Submit</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+
+function App() {
+  const [contact, setContact] = useState({
+    fName: "",
+    lName: "",
+    email: ""
+  });
+
+  function handleChange(event){
+    //name and value of the <input> elements:
+    let {name, value} = event.target
+
+    console.log(name)
+    console.log(value)
+
+    setContact(prevState => {
+      if (name === "fName"){
         return {
           fName: value,
-          lName: prevState.lName
+          lName: prevState.lName,
+          email: prevState.email
         }
-      } else if(name === "lName"){
+      } else if (name === "lName"){
         return {
           fName: prevState.fName,
-          lName: value
+          lName: value,
+          email: prevState.email
+        }
+      } else if (name === "email"){
+        return {
+          fName: prevState.fName,
+          lName: prevState.lName,
+          email: value
         }
       }
     })
+
   }
 
-  
 
   return (
     <div className="container">
-      <h1>Hello {fullName.fName} {fullName.lName}</h1>
+      <h1>
+        Hello {contact.fName} {contact.lName}
+      </h1>
+      <p>{contact.email}</p>
+      
       <form>
-        <input name="fName" onChange={handleChange} placeholder="First Name" value={fullName.fName}/>
-        <input name="lName" onChange={handleChange} placeholder="Last Name" value={fullName.lName}/>
+        <input name="fName" onChange={handleChange} placeholder="First Name" value={contact.fName}/>
+        <input name="lName" onChange={handleChange} placeholder="Last Name" value={contact.lName}/>
+        <input name="email" onChange={handleChange} placeholder="Email" value={contact.email}/>
         <button>Submit</button>
       </form>
     </div>
