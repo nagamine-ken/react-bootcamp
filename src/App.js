@@ -70,7 +70,7 @@ import Form from "./Form";
 // function App() {
 
 //   setInterval(updateTime, 1000)
-  
+
 //   let now = new Date().toLocaleTimeString();
 //   // console.log(now);
 
@@ -80,7 +80,6 @@ import Form from "./Form";
 //     let newTime = new Date().toLocaleTimeString();
 //     setTime(newTime)
 //   }
-
 
 //   return (
 //     <div className="container">
@@ -92,39 +91,98 @@ import Form from "./Form";
 
 // Event Handler:
 
+// function App() {
+//   const [headingText, setHeadingText] = useState("Hey!");
+//   const [isMouseOver, setMouseOver] = useState(false);
+//   const [currentInput, setNewInput] = useState("");
+
+//   function handleClick(event) {
+//     setHeadingText(currentInput);
+//     console.log("Clicked!");
+
+//     event.preventDefault();
+//   }
+
+//   function mouseOver() {
+//     setMouseOver(true);
+//   }
+
+//   function mouseOut() {
+//     setMouseOver(false);
+//   }
+
+//   function handleChange(event) {
+//     console.log(event.target.value);
+//     setNewInput(event.target.value);
+//   }
+
+//   return (
+//     <div className="container">
+//       <h1>{headingText}</h1>
+//       <form onSubmit={handleClick}>
+//         <input
+//           onChange={handleChange}
+//           value={currentInput}
+//           type="text"
+//           placeholder="Type anything"
+//         />
+//         <button
+//           style={{ backgroundColor: isMouseOver ? "black" : "white" }}
+//           onMouseOver={mouseOver}
+//           onMouseOut={mouseOut}
+//         >
+//           Submit
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
+
+
+
 function App() {
 
-  const [headingText, setHeadingText] = useState("Hey!")
-  const [isMouseOver, setMouseOver] = useState(false)
-  const [currentInput, setNewInput] = useState("")
-
-  function handleClick(){
-    setHeadingText(currentInput)
-    console.log("Clicked!")
-  }
-
-  function mouseOver(){
-    setMouseOver(true)
-  } 
-
-  function mouseOut(){
-    setMouseOver(false)
-  } 
+  let [fullName, setFullName] = useState({
+    fName: "",
+    lName: ""
+  })
+  
 
   function handleChange(event){
-    console.log(event.target.value)
-    setNewInput(event.target.value)
+    const newValue = event.target.value
+    const inputName = event.target.name
+    let {name, value} = event.target
+    console.log(newValue)
+    console.log(inputName)
+
+    // The next snippet is crucial to MANAGE COMPLEX STATES:
+    setFullName(prevState => {
+      if(name === "fName"){
+        return {
+          fName: value,
+          lName: prevState.lName
+        }
+      } else if(name === "lName"){
+        return {
+          fName: prevState.fName,
+          lName: value
+        }
+      }
+    })
   }
+
+  
 
   return (
     <div className="container">
-      <h1>{headingText}</h1>
-      <input onChange={handleChange} value={currentInput} type="text" placeholder="Type anything" />
-      <button style={{backgroundColor: isMouseOver ? "black" : "white" }} onClick={handleClick} onMouseOver={mouseOver} onMouseOut={mouseOut}>Submit</button>
+      <h1>Hello {fullName.fName} {fullName.lName}</h1>
+      <form>
+        <input name="fName" onChange={handleChange} placeholder="First Name" value={fullName.fName}/>
+        <input name="lName" onChange={handleChange} placeholder="Last Name" value={fullName.lName}/>
+        <button>Submit</button>
+      </form>
     </div>
   );
 }
-
-
 
 export default App;
