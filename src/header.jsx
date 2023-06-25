@@ -1,11 +1,12 @@
 
-import "./App.css";
+import React from "react";
+import TryIcon from '@mui/icons-material/Try';
 
 function Header() {
   return (
-  <header>
-    <h1>Ken's Keeper</h1>
-  </header>
+    <header>
+      <h1><TryIcon />Keeper</h1>
+    </header>
   );
 }
 

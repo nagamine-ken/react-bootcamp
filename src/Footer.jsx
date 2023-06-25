@@ -1,11 +1,12 @@
 
-import "./App.css";
+import React from "react";
 
 function Footer() {
+  const year = new Date().getFullYear();
   return (
-  <footer>
-    <p>Copyright {(new Date().getFullYear())}</p>
-  </footer>
+    <footer>
+      <p>Copyright ⓒ {year}</p>
+    </footer>
   );
 }
 

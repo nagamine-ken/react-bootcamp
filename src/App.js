@@ -1,18 +1,91 @@
 import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 import "./App.css";
-// import Header from "./header.jsx";
-// import Footer from "./Footer.jsx";
-// import Note from "./Note.jsx";
+import Header from "./header.jsx";
+import Footer from "./Footer.jsx";
+import Note from "./Note.jsx";
 // import notes from "./notes";
+import CreateArea from "./CreateArea";
 // import Login from "./Login";
 // import Form from "./Form";
-import ToDoItem from "./ToDoItem";
-import { v4 as uuidv4 } from 'uuid'
-
-
+// import ToDoItem from "./ToDoItem";
+// import InputArea from "./InputArea";
+// import { v4 as uuidv4 } from 'uuid'
 
 // Keeoer's App:
+
+function App() {
+  const [notes, setNotes] = useState([]);
+
+  function addNote(newNote) {
+    setNotes(prevNotes => {
+      return [...prevNotes, newNote];
+    });
+  }
+
+  function deleteNote(id) {
+    setNotes(prevNotes => {
+      return prevNotes.filter((noteItem, index) => {
+        return index !== id;
+      });
+    });
+  }
+
+  return (
+    <div>
+      <Header />
+      <CreateArea onAdd={addNote} />
+      {notes.map((noteItem, index) => {
+        return (
+          <Note
+            key={index}
+            id={index}
+            title={noteItem.title}
+            content={noteItem.content}
+            onDelete={deleteNote}
+          />
+        );
+      })}
+      <Footer />
+    </div>
+  );
+}
+
+
+
+// function App() {
+//   const [notes, setNotes] = useState([]);
+
+//   function addNote(note) {
+//     console.log(note);
+
+//     setNotes((prevNotes) => {
+//       return [...prevNotes, note];
+//     });
+//   }
+
+//   function deleteNote(id){
+//     // console.log("Got the order to delete!")
+//     setNotes((prevNotes) => {
+//       return prevNotes.filter((noteItem, index) => {
+//         return index !== id
+//       })
+//     })
+//   }
+
+//   return (
+//     <div>
+//       <Header />
+//       <CreateArea onAdd={addNote} />
+//       {notes.map((noteItem, index) => {
+//         return <Note key={index} id={index} title={noteItem.title} content={noteItem.content} onDelete={deleteNote} />
+//       })}
+
+//       <Footer />
+//     </div>
+//   );
+// }
+
 // function App() {
 //   return (
 //     <div>
@@ -142,15 +215,12 @@ import { v4 as uuidv4 } from 'uuid'
 //   );
 // }
 
-
-
 // function App() {
 
 //   let [fullName, setFullName] = useState({
 //     fName: "",
 //     lName: ""
 //   })
-  
 
 //   function handleChange(event){
 //     // const newValue = event.target.value
@@ -177,8 +247,6 @@ import { v4 as uuidv4 } from 'uuid'
 //     })
 //   }
 
-  
-
 //   return (
 //     <div className="container">
 //       <h1>Hello {fullName.fName} {fullName.lName}</h1>
@@ -190,7 +258,6 @@ import { v4 as uuidv4 } from 'uuid'
 //     </div>
 //   );
 // }
-
 
 // function App() {
 //   const [contact, setContact] = useState({
@@ -235,7 +302,7 @@ import { v4 as uuidv4 } from 'uuid'
 //         Hello {contact.fName} {contact.lName}
 //       </h1>
 //       <p>{contact.email}</p>
-      
+
 //       <form>
 //         <input name="fName" onChange={handleChange} placeholder="First Name" value={contact.fName}/>
 //         <input name="lName" onChange={handleChange} placeholder="Last Name" value={contact.lName}/>
@@ -245,10 +312,6 @@ import { v4 as uuidv4 } from 'uuid'
 //     </div>
 //   );
 // }
-
-
-
-
 
 // function App() {
 //   const [contact, setContact] = useState({
@@ -273,14 +336,13 @@ import { v4 as uuidv4 } from 'uuid'
 
 //   }
 
-
 //   return (
 //     <div className="container">
 //       <h1>
 //         Hello {contact.fName} {contact.lName}
 //       </h1>
 //       <p>{contact.email}</p>
-      
+
 //       <form>
 //         <input name="fName" onChange={handleChange} placeholder="First Name" value={contact.fName}/>
 //         <input name="lName" onChange={handleChange} placeholder="Last Name" value={contact.lName}/>
@@ -291,49 +353,96 @@ import { v4 as uuidv4 } from 'uuid'
 //   );
 // }
 
+// function App() {
 
+//   const [inputText, setInputText] = useState("")
+//   const [items, setItems] = useState([])
 
-function App() {
+//   function handleChange(event){
+//     console.log(event.target.value)
+//     const newValue = event.target.value
+//     setInputText(newValue)
+//   }
 
-  const [inputText, setInputText] = useState("")
-  const [items, setItems] = useState([])
+//   function addItem(){
+//     setItems( prevItems =>{
+//       return [...prevItems, inputText]
+//     })
+//     setInputText("")
+//   }
 
-  function handleChange(event){
-    console.log(event.target.value)
-    const newValue = event.target.value
-    setInputText(newValue)
-  }
+//   function deleteItem(id){
+//     setItems(prevValues => {
+//       return prevValues.filter(
+//         (item, index) => {
+//           return index !== id
+//         }
+//       )
+//     })
+//   }
 
-  function addItem(){
-    setItems( prevItems =>{
-      return [...prevItems, inputText]
-    })
-    setInputText("")
-  }
+//   return (
+//     <div className="container">
+//       <div className="heading">
+//         <h1>To-Do List</h1>
+//       </div>
+//       <div className="form">
+//         <input onChange={handleChange} type="text" value={inputText}/>
+//         <button onClick={addItem}>
+//           <span>Add</span>
+//         </button>
+//       </div>
+//       <div>
+//         <ul>
+//           {items.map((item, index)=>{
+//             // console.log(items)
+//             return <ToDoItem onChecked={deleteItem} key={index} id={index} text={item} />
+//           })}
+//         </ul>
+//       </div>
+//     </div>
+//   );
+// }
 
-  return (
-    <div className="container">
-      <div className="heading">
-        <h1>To-Do List</h1>
-      </div>
-      <div className="form">
-        <input onChange={handleChange} type="text" value={inputText}/>
-        <button onClick={addItem}>
-          <span>Add</span>
-        </button>
-      </div>
-      <div>
-        <ul>
-          {items.map((item)=>{
-            // console.log(items)
-            // return <li>{item}</li>
-            return <ToDoItem key={uuidv4()} text={item} />
-          })}
-        </ul>
-      </div>
-    </div>
-  );
-}
+// function App() {
 
+//   const [items, setItems] = useState([]);
+
+//   function addItem(inputText) {
+//     setItems(prevItems => {
+//       return [...prevItems, inputText];
+//     });
+
+//   }
+
+//   function deleteItem(id) {
+//     setItems(prevItems => {
+//       return prevItems.filter((item, index) => {
+//         return index !== id;
+//       });
+//     });
+//   }
+
+//   return (
+//     <div className="container">
+//       <div className="heading">
+//         <h1>To-Do List</h1>
+//       </div>
+//       <InputArea onAdd={addItem} />
+//       <div>
+//         <ul>
+//           {items.map((todoItem, index) => (
+//             <ToDoItem
+//               key={index}
+//               id={index}
+//               text={todoItem}
+//               onChecked={deleteItem}
+//             />
+//           ))}
+//         </ul>
+//       </div>
+//     </div>
+//   );
+// }
 
 export default App;
